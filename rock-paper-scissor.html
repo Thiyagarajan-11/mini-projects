@@ -29,10 +29,15 @@
             font-weight: bolder;
             font-size: 20px;
         }
+        p{
+            color: white;
+            font-size: 20px;
+            margin-left: 10px;
+        }
         .Reset{
            color: white ;
            font-size: large;
-           margin-top: 30px;
+           margin-top: 15px;
            border-radius: 0;
            height: auto;
            cursor: pointer;
@@ -43,32 +48,39 @@
         <p class="title">ROCK-PAPER-SCISSOR</p>
         <button
         onclick="
-        r='Rock';
+        r='✊';
         com();
-       res('Rock','Paper');
+       res('✊','🖐');
+       upadte();
         "
         >
             ✊
         </button>
         <button 
         onclick="
-        r='Paper';
+        r='🖐';
         com();
-        res('Paper','Scissor');
+        res('🖐','✌');
+        upadte();
         ">
             🖐
         </button>
         <button
         onclick="
-        r='Scissor';
+        r='✌';
         com();
-        res('Scissor','Rock');
+        res('✌','✊');
+        upadte();
         ">
             ✌
         </button>
         <br/>
+        <p class="js-text1"></p>
+        <p class="js-text2"></p>
+        <p class="js-scoreUpadte"></p>
         <button class="Reset" onclick="
         score.wins=score.losses=score.ties=0;
+        upadte();
         ">
             Reset
         </button>
@@ -81,21 +93,30 @@
         function com(){
             computer=Math.random();
         if(computer<=1/3){
-            computerChoice = 'Rock';
+            computerChoice = '✊';
         }
         else if(computer>=1/3 && computer<2/3){
-            computerChoice='Paper';
+            computerChoice='🖐';
         }
         else{
-            computerChoice='Scissor';
+            computerChoice='✌';
         }
         }
         function res(a,b){
-            result=(computerChoice===a)?'tie':((computerChoice===b)?'you lose':'you win');
-            score_result=(result==='you win')?score.wins+=1:((result==='tie')?score.ties+=1:score.losses+=1);
-            localStorage.setItem('score',JSON.stringify(score));
-            alert(`you picked ${r}. computer picked ${computerChoice},${result}.
-wins=${score.wins} losses=${score.losses} ties=${score.ties}`);
+           let result=(computerChoice===a)?'tie':((computerChoice===b)?'you lose':'you win');
+           let score_result=(result==='you win')?score.wins+=1:((result==='tie')?score.ties+=1:score.losses+=1);
+          /*  alert(`you picked ${r}. computer picked ${computerChoice},${result}.
+wins=${score.wins} losses=${score.losses} ties=${score.ties}`); */
+            let win_loss=document.querySelector('.js-text1');
+            let choice=document.querySelector(`.js-text2`);
+            win_loss.innerHTML=`${result}.`;
+            choice.innerHTML=`you ${r} | computer ${computerChoice}`;
         }
+        function upadte(){
+          document.querySelector('.js-scoreUpadte').innerHTML=`wins=${score.wins} losses=${score.losses} ties=${score.ties}`;
+          localStorage.setItem('score',JSON.stringify(score));
+         
+        }
+        upadte();
     </script>
 </html>
