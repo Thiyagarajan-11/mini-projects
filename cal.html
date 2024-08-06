@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+    </head>
+    <style>
+        body{
+            background-color: rgb(78, 78, 78);
+        }
+        .title{
+            color: white;
+            text-align: center;
+        }
+        .main-div{
+            background-color: black;
+            height: 350px;
+            width: 255px;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            border-radius: 10px;
+        }
+        .left-div{
+            margin-top: 5px;
+            display: flex;
+            flex-direction: row;
+            width: 250px;
+            height: 280px;
+        }
+        .result{
+            height: 25px;
+            width: 240px;
+            margin-top: 30px;
+            margin-left: 5px;
+            background-color: white;
+            color: black;
+        }
+        .right-div{
+            display: flex;
+        flex-direction: column; 
+        width: 60px;
+        margin-left: 15px;
+        }
+        .right-div button{
+            background-color: orange;
+            font-size: large;
+            margin-bottom: 5px;
+            
+        }
+        button{
+            height: 50px;
+            width: 50px;
+            margin: 5px ;
+            border-radius:25px ;
+            background-color: rgb(97, 97, 97);
+            border: none;
+            font-size: large;
+            cursor: pointer;
+            color: white;
+        }
+        .dot{
+            font-size: 30px;
+            padding-bottom: 40px;
+        }
+        .clear{
+            margin-left: 200px;
+        }
+        
+    </style>
+    <body>
+        <h1 class="title">CALCULATOR</h1>
+        <div class="main-div">
+            <div class="tx">    
+                    <p class="result js-result"></p>
+            </div>
+            <button class="clear"
+            onclick="
+            cal='';
+            display();
+            ">clear</button>
+            <div class="left-div">
+                <div>
+                    <button onclick="
+                        cal+='1';
+                        display();
+                        ">1</button>
+                    <button onclick="
+                        cal+='4';
+                        display();
+                    ">4</button>
+                    <button onclick="
+                        cal+='7';
+                        display();
+                    ">7</button>
+                    <button onclick="
+                     cal+='.';
+                    display();"
+                     class="dot">.</button>
+                </div>
+                <div>
+                    <button onclick="
+                    cal+='2'
+                    display();;
+                ">2</button>
+                    <button onclick="
+                    cal+='5';
+                    display();
+                ">5</button>
+                    <button onclick="
+                    cal+='8';
+                    display();
+                ">8</button>
+                    <button onclick="
+                    cal+='0';
+                    display();
+                ">0</button>
+                </div>
+                <div>
+                    <button onclick="
+                    cal+='3';
+                    display();
+                ">3</button>
+                    <button onclick="
+                    cal+='6';
+                    display();
+                ">6</button>
+                    <button onclick="
+                    cal+='9';
+                    display();
+                ">9</button>
+                    <button onclick="
+                    cal=eval(cal);
+                    console.log(cal);
+                    display();
+                    cal='';
+                    ">=</button>
+                </div>
+            <div class="right-div">
+                <button onclick="
+                cal+='+';
+                display();
+            ">+</button>
+                <button onclick="
+                cal+='-';
+                display();
+            ">-</button>
+                <button onclick="
+                cal+='*';
+                display();
+            ">x</button>
+                <button onclick="
+                cal+='/';
+                display();
+            ">/</button>
+            </div>
+            </div>
+        </div>
+    </body>
+    <script>
+       let cal='';
+       function display(){
+        let dis=document.querySelector('.js-result');
+        dis.innerHTML=cal;
+       }
+    </script>
+</html>
