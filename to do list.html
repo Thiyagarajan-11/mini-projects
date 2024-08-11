@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>to do list</title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            button{
+                background-color: green;
+                color: white;
+                border: none;
+                height: 30px;
+                padding-left:15px;
+                padding-right: 15px;
+                height: 33px;
+                cursor: pointer;
+            }
+            .del-button{
+                background-color: maroon;
+            }
+            .del-all{
+                background-color: rgb(0, 0, 0);
+            }
+            .date{
+                height: 30px;
+            }
+            .div-main ,.result{
+                display: grid;
+                grid-column-gap: 10px;
+                grid-row-gap: 5px;
+            }
+            .div-main{
+                grid-template-columns: 200px 150px 100px 100px;
+            }
+
+            .result{
+                margin-top: 10px;
+                align-items: center;
+                grid-template-columns:200px 150px 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Todo List</h1>
+        <div class="div-main">
+        <input class="js-text text" placeholder="Type Here">
+        <input class="js-date date" type="date">
+        <button 
+        onclick="
+        add();
+        "
+        >Add</button>
+        <button class="del-all" onclick="
+        todolist=[];
+        todolistDate=[];
+        loop();
+        ">
+            Del all
+        </button>
+        </div>
+        <div class="js-result result"></div>
+      
+    </body>
+
+    <script>
+        let todolist=JSON.parse(localStorage.getItem('get-text'));
+        let todolistDate=JSON.parse(localStorage.getItem('get-date'));
+        let store;
+        loop();
+        function add(){
+            let text=document.querySelector('.js-text').value;
+            const date=document.querySelector('.js-date').value;
+            todolistDate.push(date);
+            todolist.push(text);
+            console.log(todolist);
+            console.log(todolistDate);
+            console.log(todolist.length);
+            loop();
+            document.querySelector('.js-text').value='';
+    }
+    console.log(todolist);
+    function loop(){
+        let display='';
+        for(let i=0;i<todolist.length;i++){
+                const text=todolist[i];
+                const date=todolistDate[i];
+                let result=`
+                <div>${text}</div>
+                <div>${date}</div>
+                <button 
+                    class="del-button"
+                    onclick="todolist.splice(${i},1);
+                    todolistDate.splice(${i},1);
+                    loop();
+                    ">Delete</button>`;
+                display+=result;
+            }
+           let dis= document.querySelector('.js-result').innerHTML=display;
+            store=display;
+            localStorage.setItem('get-text',JSON.stringify(todolist));
+            localStorage.setItem('get-date',JSON.stringify(todolistDate));
+        }
+        
+
+    </script>
+</html>
